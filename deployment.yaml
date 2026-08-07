@@ -1,0 +1,26 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-app
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      containers:
+        - name: test-app
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              echo '<h1>Hello from Kubernetes</h1>' > /usr/share/nginx/html/index.html &&
+              nginx -g 'daemon off;'
+          ports:
+            - containerPort: 80
