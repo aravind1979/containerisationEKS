@@ -1,4 +1,4 @@
-# containerisationEKS
+# K8, Helm
 
 This repository demonstrates how to containerize an application and deploy it to a Kubernetes cluster using Kubernetes manifests and Helm.
 
